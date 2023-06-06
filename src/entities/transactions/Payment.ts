@@ -1,4 +1,5 @@
-import XptoAccount from "./XptoAccount";
+import XptoAccount from "../XptoAccount";
+import { Transaction } from "../interfaces/Transaction";
 
 type PaymentParams = {
   value:number,
@@ -8,7 +9,7 @@ type PaymentParams = {
   paymentDate: Date 
 }
 
-export class Payment { 
+export class Payment implements Transaction { 
   constructor(private _params: PaymentParams ){
   }
   effect(){
