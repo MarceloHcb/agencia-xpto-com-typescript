@@ -1,24 +1,29 @@
+import Validator from "./validations/Schema";
 class XptoAccount {
-  constructor(private _email:string, private balance:number, private _creationDate = new Date()){
-
+constructor(private _email:string, private _balance:number, private _creationDate = new Date()){
+  Validator.validateEmail(_email)
   }
 
   debit(value:number):void{
     if(value<= 0){
       throw new Error('Invalid value')
     }
-    if(value > this.balance){
+    if(value > this._balance){
       throw new Error('Insufficient balance')
     }
-    this.balance -= value
+    this._balance -= value
   }
 
   credit(value:number):void{
-    this.balance += value
+    this._balance += value
   }
 
   get creationDate():string {
-    return `${this._email} creted on ${this._creationDate} with ${this.balance}`
+    return `${this._email} creted on ${this._creationDate} with ${this._balance}`
+  }
+
+  getBalance():number{
+    return this._balance
   }
 
   updateEmail(email:string):void{
