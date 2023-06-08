@@ -1,18 +1,19 @@
 import Validator from "./validations/Schema";
-class XptoAccount {
-constructor(private _email:string, private _balance:number, private _creationDate = new Date()){
+abstract class XptoAccount {
+constructor(private _email:string, protected _balance:number, 
+  private _creationDate = new Date() ){
   Validator.validateEmail(_email)
   }
-
-  debit(value:number):void{
-    if(value<= 0){
-      throw new Error('Invalid value')
-    }
-    if(value > this._balance){
-      throw new Error('Insufficient balance')
-    }
-    this._balance -= value
-  }
+  abstract debit(value:number) :void
+  // debit(value:number):void{
+  //   if(value<= 0){
+  //     throw new Error('Invalid value')
+  //   }
+  //   if(value > this._balance){
+  //     throw new Error('Insufficient balance')
+  //   }
+  //   this._balance -= value
+  // }
 
   credit(value:number):void{
     this._balance += value
